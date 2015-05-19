@@ -15,34 +15,13 @@
 #273
 
 defmodule Chop do
-  def guess(answer, low.._) when answer == low do
-    IO.puts answer
-  end
-
-  def guess(answer, _..high) when answer == high do
-    IO.puts answer
-  end
-
-  def guess(answer, 1..high) do
-    make_a_guess(answer, 1..high, current_guess(1..high))
-  end
-
-  def make_a_guess(answer, low..high, guess) when answer > guess do
-    IO.puts "Is it #{guess}"
-    make_a_guess(answer, guess..high, current_guess(guess..high))
-  end
-
-  def make_a_guess(answer, low..high, guess) when answer < guess do
-    IO.puts "Is it #{guess}"
-    make_a_guess(answer, low..guess, current_guess(low..guess))
-  end
-
-  def make_a_guess(answer, low..high, guess) when answer == guess do
-    IO.puts "Is it #{guess}"
-    IO.puts answer
-  end
+  def guess(answer, low..high), do: guess(answer, current_guess(low..high), low..high)
+  def guess(answer, guess, _.._) when answer == guess, do: IO.puts answer
+  def guess(answer, guess, _..high) when answer > guess, do: guess(answer, guess..high)
+  def guess(answer, guess, low.._) when answer < guess, do: guess(answer, low..guess)
 
   def current_guess(low..high) do
+    IO.puts "Is it #{div(high - low, 2) + low}?"
     div(high - low, 2) + low
   end
 end
