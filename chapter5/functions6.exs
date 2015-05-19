@@ -15,7 +15,7 @@
 #273
 
 defmodule Chop do
-  def guess(answer, low..high), do: guess(answer, current_guess(low..high), low..high)
+  def guess(answer, range), do: guess(answer, current_guess(range), range)
   def guess(answer, guess, _.._) when answer == guess, do: IO.puts answer
   def guess(answer, guess, _..high) when answer > guess, do: guess(answer, guess..high)
   def guess(answer, guess, low.._) when answer < guess, do: guess(answer, low..guess)
